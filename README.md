@@ -1,5 +1,7 @@
 # DocLens
 
+[![Tests](https://github.com/emdej111/doclens-ai-chat/actions/workflows/tests.yml/badge.svg)](https://github.com/emdej111/doclens-ai-chat/actions/workflows/tests.yml)
+
 AI-powered document analyzer — upload a PDF, get an instant summary, and ask questions about its contents in natural language.
 
 > Built using AI-assisted development (Lovable for the frontend scaffold, Claude for iteration and the backend) — reflecting a modern development workflow where AI tools accelerate implementation while the developer owns architecture, integration, and product decisions. See [Known limitations](#known-limitations) for the trade-offs made along the way.
