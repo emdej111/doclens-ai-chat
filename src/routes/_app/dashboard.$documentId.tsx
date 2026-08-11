@@ -17,12 +17,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useDocuments } from "@/lib/documents-store";
 
-export const Route = createFileRoute("/_authenticated/dashboard/$documentId")({
+export const Route = createFileRoute("/_app/dashboard/$documentId")({
   component: DocumentView,
 });
 
 function DocumentView() {
-  const { documentId } = useParams({ from: "/_authenticated/dashboard/$documentId" });
+  const { documentId } = useParams({ from: "/_app/dashboard/$documentId" });
   const navigate = useNavigate();
   const { documents, loading, conversations, ask, remove, clearConversation } = useDocuments();
   const document = documents.find((doc) => doc.document_id === documentId);

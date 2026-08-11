@@ -144,7 +144,16 @@ export function DocumentsProvider({ children }: { children: ReactNode }) {
 
   return (
     <DocumentsContext.Provider
-      value={{ documents, loading, demoMode, conversations, upload, remove, ask, clearConversation }}
+      value={{
+        documents,
+        loading,
+        demoMode,
+        conversations,
+        upload,
+        remove,
+        ask,
+        clearConversation,
+      }}
     >
       {children}
     </DocumentsContext.Provider>

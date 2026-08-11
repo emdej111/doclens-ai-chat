@@ -4,7 +4,7 @@ import { UploadCloud } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UploadDialog } from "@/components/UploadDialog";
 
-export const Route = createFileRoute("/_authenticated/dashboard/")({
+export const Route = createFileRoute("/_app/dashboard/")({
   component: DashboardEmpty,
 });
 
@@ -29,7 +29,9 @@ function DashboardEmpty() {
       <UploadDialog
         open={open}
         onOpenChange={setOpen}
-        onUploaded={(documentId) => navigate({ to: "/dashboard/$documentId", params: { documentId } })}
+        onUploaded={(documentId) =>
+          navigate({ to: "/dashboard/$documentId", params: { documentId } })
+        }
       />
     </div>
   );

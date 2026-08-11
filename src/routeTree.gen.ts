@@ -10,56 +10,54 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
-import { Route as AuthenticatedDashboardDocumentIdRouteImport } from './routes/_authenticated/dashboard.$documentId'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppDashboardIndexRouteImport } from './routes/_app/dashboard.index'
+import { Route as AppDashboardDocumentIdRouteImport } from './routes/_app/dashboard.$documentId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
-const AuthenticatedDashboardIndexRoute =
-  AuthenticatedDashboardIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => AuthenticatedDashboardRoute,
-  } as any)
-const AuthenticatedDashboardDocumentIdRoute =
-  AuthenticatedDashboardDocumentIdRouteImport.update({
-    id: '/$documentId',
-    path: '/$documentId',
-    getParentRoute: () => AuthenticatedDashboardRoute,
-  } as any)
+const AppDashboardIndexRoute = AppDashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
+const AppDashboardDocumentIdRoute = AppDashboardDocumentIdRouteImport.update({
+  id: '/$documentId',
+  path: '/$documentId',
+  getParentRoute: () => AppDashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
-  '/dashboard/$documentId': typeof AuthenticatedDashboardDocumentIdRoute
-  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard': typeof AppDashboardRouteWithChildren
+  '/dashboard/$documentId': typeof AppDashboardDocumentIdRoute
+  '/dashboard/': typeof AppDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard/$documentId': typeof AuthenticatedDashboardDocumentIdRoute
-  '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/$documentId': typeof AppDashboardDocumentIdRoute
+  '/dashboard': typeof AppDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
-  '/_authenticated/dashboard/$documentId': typeof AuthenticatedDashboardDocumentIdRoute
-  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_app': typeof AppRouteRouteWithChildren
+  '/_app/dashboard': typeof AppDashboardRouteWithChildren
+  '/_app/dashboard/$documentId': typeof AppDashboardDocumentIdRoute
+  '/_app/dashboard/': typeof AppDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -69,15 +67,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/_authenticated'
-    | '/_authenticated/dashboard'
-    | '/_authenticated/dashboard/$documentId'
-    | '/_authenticated/dashboard/'
+    | '/_app'
+    | '/_app/dashboard'
+    | '/_app/dashboard/$documentId'
+    | '/_app/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AppRouteRoute: typeof AppRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -89,68 +87,66 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
+    '/_app': {
+      id: '/_app'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      preLoaderRoute: typeof AppRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRouteRoute
     }
-    '/_authenticated/dashboard/': {
-      id: '/_authenticated/dashboard/'
+    '/_app/dashboard/': {
+      id: '/_app/dashboard/'
       path: '/'
       fullPath: '/dashboard/'
-      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
-      parentRoute: typeof AuthenticatedDashboardRoute
+      preLoaderRoute: typeof AppDashboardIndexRouteImport
+      parentRoute: typeof AppDashboardRoute
     }
-    '/_authenticated/dashboard/$documentId': {
-      id: '/_authenticated/dashboard/$documentId'
+    '/_app/dashboard/$documentId': {
+      id: '/_app/dashboard/$documentId'
       path: '/$documentId'
       fullPath: '/dashboard/$documentId'
-      preLoaderRoute: typeof AuthenticatedDashboardDocumentIdRouteImport
-      parentRoute: typeof AuthenticatedDashboardRoute
+      preLoaderRoute: typeof AppDashboardDocumentIdRouteImport
+      parentRoute: typeof AppDashboardRoute
     }
   }
 }
 
-interface AuthenticatedDashboardRouteChildren {
-  AuthenticatedDashboardDocumentIdRoute: typeof AuthenticatedDashboardDocumentIdRoute
-  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+interface AppDashboardRouteChildren {
+  AppDashboardDocumentIdRoute: typeof AppDashboardDocumentIdRoute
+  AppDashboardIndexRoute: typeof AppDashboardIndexRoute
 }
 
-const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
-  {
-    AuthenticatedDashboardDocumentIdRoute:
-      AuthenticatedDashboardDocumentIdRoute,
-    AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
-  }
-
-const AuthenticatedDashboardRouteWithChildren =
-  AuthenticatedDashboardRoute._addFileChildren(
-    AuthenticatedDashboardRouteChildren,
-  )
-
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRouteWithChildren
+const AppDashboardRouteChildren: AppDashboardRouteChildren = {
+  AppDashboardDocumentIdRoute: AppDashboardDocumentIdRoute,
+  AppDashboardIndexRoute: AppDashboardIndexRoute,
 }
 
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRouteWithChildren,
+const AppDashboardRouteWithChildren = AppDashboardRoute._addFileChildren(
+  AppDashboardRouteChildren,
+)
+
+interface AppRouteRouteChildren {
+  AppDashboardRoute: typeof AppDashboardRouteWithChildren
 }
 
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppDashboardRoute: AppDashboardRouteWithChildren,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AppRouteRoute: AppRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

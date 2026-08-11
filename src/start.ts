@@ -28,4 +28,3 @@ export const startInstance = createStart(() => ({
   functionMiddleware: [],
   requestMiddleware: [errorMiddleware, csrfMiddleware],
 }));
-

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { UploadDialog } from "@/components/UploadDialog";
 import { DocumentsProvider, useDocuments } from "@/lib/documents-store";
 
-export const Route = createFileRoute("/_authenticated/dashboard")({
+export const Route = createFileRoute("/_app/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — DocLens" },
@@ -107,7 +107,9 @@ function DashboardLayout() {
       <UploadDialog
         open={uploadOpen}
         onOpenChange={setUploadOpen}
-        onUploaded={(documentId) => navigate({ to: "/dashboard/$documentId", params: { documentId } })}
+        onUploaded={(documentId) =>
+          navigate({ to: "/dashboard/$documentId", params: { documentId } })
+        }
       />
     </div>
   );
